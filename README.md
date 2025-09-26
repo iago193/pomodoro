@@ -1,39 +1,73 @@
-Pomodoro Timer
+# React + TypeScript + Vite
 
-Um timer Pomodoro moderno desenvolvido em React + TypeScript com Tailwind CSS, inspirado na técnica Pomodoro para aumentar a produtividade.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Funcionalidades
+Currently, two official plugins are available:
 
-Contagem regressiva de tempo configurável (mainTime)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-Botões de controle: iniciar, pausar e resetar o timer
+## React Compiler
 
-Indicação de status atual (working, resting)
+The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
 
-Layout responsivo e estilizado com Tailwind CSS
+## Expanding the ESLint configuration
 
-Seção de details sempre fixada no fundo do card
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-Código modularizado com hooks personalizados (useInterval)
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-Tecnologias
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-React (Functional Components + Hooks)
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-TypeScript (tipagem segura e interfaces para props)
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-Tailwind CSS (layout moderno, responsivo e fácil de customizar)
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-Estrutura
-
-PomodoroTime → componente principal do timer
-
-Timer → exibe o tempo atual formatado
-
-Button → botões reutilizáveis para controles
-
-useInterval → hook customizado para lidar com setInterval de forma segura
-
-Objetivo
-
-Ajudar usuários a organizar sessões de trabalho e pausas curtas de forma prática e visual, promovendo produtividade e foco, seguindo a técnica Pomodoro.
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```

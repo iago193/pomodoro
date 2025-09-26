@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+:root {
+  --PrimaryColor: #1c1652;
+  --segundaryColor: #f8f7ef;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--PrimaryColor);
+  transition: background-color 1s ease;
+  overflow: hidden;
+}
+
+button {
+  background-color: var(--PrimaryColor);
+  color: var(--segundaryColor);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+button:hover {
+  filter: brightness(0.85);
+}
