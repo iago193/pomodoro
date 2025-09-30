@@ -1,5 +1,5 @@
 import React from "react";
-import { secondsToTime } from "../utils/segunds-to-time";
+import { secondsToTime } from "../utils/seconds-to-time";
 
 interface Props {
   mainTime: number;
